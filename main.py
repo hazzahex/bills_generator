@@ -19,7 +19,7 @@ total_housemate_days = sum(portions)
 horizontal_rule()
 print(f"Dividing bills by {total_housemate_days} days...")
 
-df = pd.read_csv('data/may2022.csv').drop(["Number", "Account", "Subcategory"], axis=1)
+df = pd.read_csv('data/june2022.csv').drop(["Number", "Account", "Subcategory"], axis=1)
 
 df = df[df.Memo.str.contains('|'.join(keywords))]
 df["Micro"] = df["Amount"] / total_housemate_days
@@ -31,5 +31,5 @@ horizontal_rule()
 print(f"Housemate breakdown...")
 for index, housemate in enumerate(housemates):
     total = total_micro * portions[index]
-    amount_string = '£{:.2f}'.format(total_micro * portions[index])
+    amount_string = '£{:.2f}'.format(total)
     print(f"{housemate} - {amount_string}")
