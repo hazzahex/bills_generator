@@ -1,7 +1,8 @@
 import pandas as pd
 
-keywords = ["MILK AND", "BT CONSUMER", "BRISTOL CC L TAX", "BRITISH GAS", "TV LICENCE", "WESSEXWATER", "MM RECUR"]
-housemates = ["Annabel", "Lizzy", "Harry", "Arty", "Rory", "Elise"]
+keywords = ["MILK AND", "BT CONSUMER", "BRISTOL CC L TAX",
+            "BRITISH GAS", "TV LICENCE", "WESSEXWATER", "MM RECUR"]
+housemates = ["Annabel", "Harry", "Arty", "Bex", "Elise"]
 
 portions = []
 
@@ -13,13 +14,15 @@ def horizontal_rule():
 
 
 for housemate in housemates:
-    portions.append(int(input("How many days has " + housemate + " been in the house this month? ")))
+    portions.append(int(input("How many days has " +
+                    housemate + " been in the house this month? ")))
 
 total_housemate_days = sum(portions)
 horizontal_rule()
 print(f"Dividing bills by {total_housemate_days} days...")
 
-df = pd.read_csv('data/june2022.csv').drop(["Number", "Account", "Subcategory"], axis=1)
+df = pd.read_csv('data/jan2023.csv',
+                 encoding="ISO-8859-1").drop(["Number", "Account", "Subcategory"], axis=1)
 
 df = df[df.Memo.str.contains('|'.join(keywords))]
 df["Micro"] = df["Amount"] / total_housemate_days
